@@ -15,7 +15,6 @@ body {
   color: #fff;
 }
 
-/* HEADER */
 .header {
   display: flex;
   justify-content: space-between;
@@ -68,7 +67,6 @@ body {
   color: white;
 }
 
-/* NEWS */
 .news {
   background: #efefef;
   color: #111;
@@ -133,7 +131,6 @@ body {
   color: white;
 }
 
-/* HERO */
 .hero {
   height: 680px;
   display: flex;
