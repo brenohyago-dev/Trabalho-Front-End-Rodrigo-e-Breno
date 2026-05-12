@@ -1,106 +1,345 @@
-<!DOCTYPE html>
+:root {
+  --max-width: 1280px;
+  --red: #d32f2f;
+}
 
-<html lang="en">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Public Sans', sans-serif;
+}
 
-<head>
+body {
+  background: #000;
+  color: #fff;
+}
 
-  <meta charset="UTF-8">
+/* --- AJUSTES NO HEADER E ALINHAMENTO --- */
+.header {
+  border-bottom: 1px solid #222;
+  background-color: #000;
+}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 32px;
+  width: 100%;
+}
 
-  <title>TESTE NASA</title>
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+.nav-right {
+  justify-content: flex-end;
+}
 
-  <link rel="stylesheet" href="style.css">
+/* Container do input para alinhar o ícone de busca interno */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-</head>
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #666;
+  font-size: 14px;
+}
 
-<body>
+.search {
+  border: 1px solid #333;
+  background: transparent;
+  padding: 6px 10px 6px 30px; /* padding esquerdo maior para o ícone */
+  color: white;
+  border-radius: 4px;
+  outline: none;
+}
 
-  <header class="header">
+.logo {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
+}
 
-    <div class="nav-left">
+.logo img {
+  width: 52px;
+  display: block;
+}
 
-      <span class="explore">Explore</span>
+/* Estilização dos links e ícones */
+.nav-left a, .nav-right a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre o ícone e o texto */
+  transition: color 0.2s;
+}
 
-      <input class="search" placeholder="Search">
+.nav-left a:hover, .nav-right a:hover {
+  color: var(--red);
+}
 
-    </div>
+.live {
+  border: 1px solid var(--red);
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--red);
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+}
 
-    <div class="logo">
+.live-icon {
+  font-size: 8px;
+  animation: blink 1.5s infinite;
+}
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg">
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
 
-    </div>
+.live:hover {
+  background: var(--red);
+  color: white;
+}
 
-    <div class="nav-right">
+/* --- CONTEÚDO PRINCIPAL (NEWS E HERO) --- */
+.news {
+  background: #efefef;
+  color: #111;
+  padding: 40px 0;
+}
 
-      <a href="#">News & Events</a>
-      <a href="#">Multimedia</a>
-      <a href="#">NASA+</a>
+.container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 0 32px;
+}
 
-      <span class="live">LIVE</span>
+.news-time {
+  font-size: 13px;
+  font-weight: 600;
+}
 
-    </div>
+.line {
+  height: 1px;
+  background: #ccc;
+  margin: 20px 0 30px;
+}
 
-  </header>
+.news-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr 60px;
+  align-items: center;
+  gap: 48px;
+}
 
-  <section class="news">
+.news-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
 
-    <div class="container">
+.news-title-wrap img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
 
-      <span class="news-time">
-        LIVE 1:45 p.m. EDT (1745 UTC)
-      </span>
+.news-title-wrap h2 {
+  font-size: 34px;
+  font-weight: 700;
+}
 
-      <div class="line"></div>
+.news-text {
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 540px;
+}
 
-      <div class="news-grid">
+.arrow {
+  width: 44px;
+  height: 44px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
 
-        <div class="news-title-wrap">
+.hero {
+  height: 680px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,0.85) 0%,
+      rgba(0,0,0,0.65) 25%,
+      rgba(0,0,0,0.35) 50%,
+      rgba(0,0,0,0.1) 75%,
+      rgba(0,0,0,0) 100%
+    ),
+    url('https://www.nasa.gov/wp-content/uploads/2026/04/55114649503-06b807462e-o.jpg');
+  background-size: cover;
+  background-position: center;
+}
 
-          <img src="https://www.nasa.gov/wp-content/uploads/2026/02/54932690834-554a3bc4d2-o.jpg?resize=200,200">
+.hero-inner {
+  max-width: 700px;
+  margin-left: 80px;
+}
 
-          <h2>News Conference</h2>
+.hero h1 {
+  font-size: 72px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
 
-        </div>
+.hero p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
 
-        <p class="news-text">
+.hero button {
+  background: var(--red);
+  border: none;
+  padding: 14px 26px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
 
-          NASA will host a news conference on NASA astronaut Anil Menon’s
-          upcoming mission to the International Space Station
+/* --- DESIGN RESPONSIVO CORRIGIDO --- */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
 
-        </p>
+  .nav-left,
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    flex: none;
+  }
 
-        <div class="arrow">→</div>
+  .logo {
+    order: -1; /* Joga a logo para o topo no mobile */
+  }
 
-      </div>
+  .search-container {
+    width: 100%;
+    justify-content: center;
+  }
 
-    </div>
+  .search {
+    width: 100%;
+    max-width: 280px;
+  }
 
-  </section>
+  .news {
+    padding: 24px 0;
+  }
 
-  <section class="hero">
+  .container {
+    padding: 0 20px;
+  }
 
-    <div class="hero-inner">
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
 
-      <h1>Humans in Space</h1>
+  .news-title-wrap {
+    flex-direction: column;
+    text-align: center;
+  }
 
-      <p>
+  .news-title-wrap h2 {
+    font-size: 28px;
+  }
 
-        NASA astronauts Jessica Watkins and Luke Delaney,
-        CSA astronaut Joshua Kutryk,
-        and Roscosmos cosmonaut Sergey Teteratnikov are set to launch
-        no earlier than mid-September as part of NASA’s SpaceX Crew-13 mission.
+  .news-text {
+    max-width: 100%;
+  }
 
-      </p>
+  .arrow {
+    margin: auto;
+  }
 
-      <button>NASA’s SpaceX Crew-13</button>
+  .hero {
+    height: auto;
+    min-height: 600px;
+    padding: 60px 20px;
+  }
 
-    </div>
+  .hero-inner {
+    margin-left: 0;
+    max-width: 100%;
+  }
 
-  </section>
+  .hero h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
 
-</body>
-</html>
+  .hero p {
+    font-size: 15px;
+  }
+
+  .hero button {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .news-title-wrap h2 {
+    font-size: 22px;
+  }
+
+  .nav-left, .nav-right {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .search {
+    max-width: 100%;
+  }
+} 
