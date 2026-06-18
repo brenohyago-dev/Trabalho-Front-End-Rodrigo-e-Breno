@@ -92,3 +92,86 @@ async function buscarAsteroides() {
 }
 
 buscarAsteroides();
+
+// ================================
+// GALERIA DE IMAGENS NASA
+// ================================
+
+const searchInput = document.getElementById("searchInput");
+const galleryGrid = document.getElementById("galleryGrid");
+
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    buscarImagensNASA();
+  }
+});
+
+async function buscarImagensNASA() {
+
+  const termo = searchInput.value.trim();
+
+  if (!termo) return;
+
+  galleryGrid.innerHTML =
+    "<p>Carregando imagens...</p>";
+
+  try {
+
+    const resposta = await fetch(
+      `https://images-api.nasa.gov/search?q=${encodeURIComponent(termo)}&media_type=image`
+    );
+
+    const dados = await resposta.json();
+
+    const imagens =
+      dados.collection.items.slice(0, 12);
+
+    galleryGrid.innerHTML = "";
+
+    if (imagens.length === 0) {
+
+      galleryGrid.innerHTML =
+        "<p>Nenhuma imagem encontrada.</p>";
+
+      return;
+    }
+
+    imagens.forEach(item => {
+
+      const imagem = item.links?.[0]?.href;
+
+      const titulo =
+        item.data?.[0]?.title || "Sem título";
+
+      const descricao =
+        item.data?.[0]?.description || "";
+
+      if (!imagem) return;
+
+      galleryGrid.innerHTML += `
+        <div class="gallery-card">
+
+          <img src="${imagem}" alt="${titulo}">
+
+          <div class="gallery-content">
+
+            <h3>${titulo}</h3>
+
+            <p>
+              ${descricao.substring(0, 150)}...
+            </p>
+
+          </div>
+
+        </div>
+      `;
+    });
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    galleryGrid.innerHTML =
+      "<p>Erro ao carregar imagens.</p>";
+  }
+}

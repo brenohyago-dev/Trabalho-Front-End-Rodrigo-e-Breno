@@ -15,7 +15,6 @@ body {
   color: #fff;
 }
 
-/* --- AJUSTES NO HEADER E ALINHAMENTO --- */
 .header {
   border-bottom: 1px solid #222;
   background-color: #000;
@@ -42,8 +41,7 @@ body {
   justify-content: flex-end;
 }
 
-/* Container do input para alinhar o ícone de busca interno */
-.search-container {
+.search-wrap {
   position: relative;
   display: flex;
   align-items: center;
@@ -59,7 +57,7 @@ body {
 .search {
   border: 1px solid #333;
   background: transparent;
-  padding: 6px 10px 6px 30px; /* padding esquerdo maior para o ícone */
+  padding: 6px 10px 6px 30px; 
   color: white;
   border-radius: 4px;
   outline: none;
@@ -76,14 +74,13 @@ body {
   display: block;
 }
 
-/* Estilização dos links e ícones */
 .nav-left a, .nav-right a {
   color: white;
   text-decoration: none;
   font-size: 14px;
   display: flex;
   align-items: center;
-  gap: 8px; /* Espaço entre o ícone e o texto */
+  gap: 8px; 
   transition: color 0.2s;
 }
 
@@ -231,6 +228,125 @@ body {
   cursor: pointer;
 }
 
+/* =========================
+   ASTEROIDS
+========================= */
+
+.asteroids {
+  background: #111;
+  padding: 60px 0;
+}
+
+.asteroids h2 {
+  font-size: 42px;
+  margin-bottom: 30px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.controls input,
+.controls button {
+  padding: 12px;
+}
+
+.controls button {
+  background: var(--red);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.stats {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #333;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background: #222;
+}
+
+.perigoso {
+  color: #ff5a5a;
+  font-weight: bold;
+}
+
+.seguro {
+  color: #6dff6d;
+  font-weight: bold;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery {
+  background: #000;
+  padding: 60px 0;
+}
+
+.gallery h2 {
+  margin-bottom: 30px;
+  font-size: 42px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.gallery-card {
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.gallery-content {
+  padding: 16px;
+}
+
+.gallery-content h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.gallery-content p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ccc;
+}
+
 /* --- DESIGN RESPONSIVO CORRIGIDO --- */
 @media (max-width: 768px) {
   .nav-container {
@@ -252,7 +368,7 @@ body {
     order: -1; /* Joga a logo para o topo no mobile */
   }
 
-  .search-container {
+  .search-wrap {
     width: 100%;
     justify-content: center;
   }
@@ -336,7 +452,7 @@ body {
     width: 100%;
   }
 
-  .search-container {
+  .search-wrap {
     width: 100%;
   }
 
