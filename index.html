@@ -145,6 +145,7 @@
               <th>Diâmetro Máximo</th>
               <th>Distância da Terra</th>
               <th>Perigoso</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -156,7 +157,55 @@
       </div>
     </section>
 
+    <!-- SEÇÃO DE FAVORITOS -->
+    <section class="favorites" id="favoritesSection" style="display:none;">
+      <div class="container">
+        <div class="favorites-header">
+          <h2>⭐ Meus Favoritos</h2>
+          <button id="clearFavoritesBtn" class="btn-clear">Limpar Tudo</button>
+        </div>
+
+        <div class="favorites-tabs">
+          <button class="fav-tab active" data-tab="fav-images">
+            <i class="fas fa-images"></i> Imagens (<span id="favImgCount">0</span>)
+          </button>
+          <button class="fav-tab" data-tab="fav-asteroids">
+            <i class="fas fa-meteor"></i> Asteroides (<span id="favAstCount">0</span>)
+          </button>
+        </div>
+
+        <div id="fav-images" class="fav-panel active">
+          <div id="favImagesGrid" class="gallery-grid">
+            <p class="fav-empty">Nenhuma imagem favoritada ainda.</p>
+          </div>
+        </div>
+
+        <div id="fav-asteroids" class="fav-panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Diâmetro Máximo</th>
+                <th>Distância da Terra</th>
+                <th>Perigoso</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="favAsteroidsTable">
+              <tr><td colspan="5" class="fav-empty">Nenhum asteroide favoritado ainda.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Botão flutuante de favoritos -->
+  <button id="favToggleBtn" class="fav-toggle-btn">
+    <i class="fas fa-star"></i>
+    <span id="favBadge" class="fav-badge" style="display:none;">0</span>
+  </button>
 
   <script src="script.js"></script>
 
