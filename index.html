@@ -24,10 +24,13 @@
         <div class="search-wrap">
           <i class="fas fa-search search-icon"></i>
           <input
-  class="search"
-  id="searchInput"
-  placeholder="Procure Imagens..."
->
+            class="search"
+            id="searchInput"
+            placeholder="Procure Imagens..."
+            minlength="3"
+            aria-describedby="searchError"
+          >
+          <small id="searchError" class="validation-message"></small>
         </div>
       </div>
 
@@ -115,7 +118,10 @@
         <h2>Asteroides Próximos da Terra</h2>
 
         <div class="controls">
-          <input type="date" id="dataBusca">
+          <div class="field-group">
+            <input type="date" id="dataBusca" aria-describedby="dataError">
+            <small id="dataError" class="validation-message"></small>
+          </div>
           <button id="buscarBtn">
             Buscar Asteroides
           </button>

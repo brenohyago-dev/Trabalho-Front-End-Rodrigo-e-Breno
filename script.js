@@ -1,17 +1,61 @@
 const API_KEY = "uDZicaK3xrGEdJV93SPObkNSTxmDG6RbxLtKYaEg";
 
 const dataBusca = document.getElementById("dataBusca");
+const searchInput = document.getElementById("searchInput");
 const resultado = document.getElementById("resultado");
 const totalSpan = document.getElementById("total");
 const perigososSpan = document.getElementById("perigosos");
 const proximoSpan = document.getElementById("proximo");
 
+const searchError = document.getElementById("searchError");
+const dataError = document.getElementById("dataError");
+
+function mostrarErro(campo, elementoErro, mensagem) {
+  campo.classList.add("input-error");
+  elementoErro.textContent = mensagem;
+}
+
+function limparErro(campo, elementoErro) {
+  campo.classList.remove("input-error");
+  elementoErro.textContent = "";
+}
+
+function validarTextoBusca(campo, elementoErro, nomeCampo) {
+  const valor = campo.value.trim();
+
+  if (valor.length === 0) {
+    mostrarErro(campo, elementoErro, `${nomeCampo} não pode ficar vazio.`);
+    return false;
+  }
+
+  if (valor.length < 3) {
+    mostrarErro(campo, elementoErro, `${nomeCampo} deve ter pelo menos 3 caracteres.`);
+    return false;
+  }
+
+  limparErro(campo, elementoErro);
+  return true;
+}
+
+function validarDataBusca() {
+  if (!dataBusca.value) {
+    mostrarErro(dataBusca, dataError, "Selecione uma data para realizar a busca.");
+    return false;
+  }
+
+  limparErro(dataBusca, dataError);
+  return true;
+}
+
 dataBusca.value = new Date().toISOString().split("T")[0];
 document.getElementById("buscarBtn").addEventListener("click", buscarAsteroides);
 
-// ================================
+dataBusca.addEventListener("change", validarDataBusca);
+searchInput?.addEventListener("input", () => {
+  if (searchInput.value.trim().length >= 3) limparErro(searchInput, searchError);
+});
+
 // FAVORITOS - ESTADO E UTILITÁRIOS
-// ================================
 
 function getFavoritos() {
   try {
@@ -38,9 +82,7 @@ function atualizarBadge() {
   astCount.textContent = favs.asteroides.length;
 }
 
-// ================================
 // PAINEL DE FAVORITOS
-// ================================
 
 document.getElementById("favToggleBtn").addEventListener("click", () => {
   const section = document.getElementById("favoritesSection");
@@ -71,9 +113,7 @@ document.querySelectorAll(".fav-tab").forEach(tab => {
   });
 });
 
-// ================================
 // IMAGENS FAVORITAS
-// ================================
 
 function isImagemFavoritada(src) {
   return getFavoritos().imagens.some(i => i.imagem === src);
@@ -110,7 +150,6 @@ function renderFavoritosImagens() {
     </div>
   `).join("");
 
-  // Attach events to fav-panel buttons
   grid.querySelectorAll(".btn-fav[data-context='fav-panel']").forEach(btn => {
     btn.addEventListener("click", function () {
       const src = this.dataset.src;
@@ -125,9 +164,7 @@ function renderFavoritosImagens() {
   });
 }
 
-// ================================
 // ASTEROIDES FAVORITOS
-// ================================
 
 function isAsteroideFavoritado(nome) {
   return getFavoritos().asteroides.some(a => a.nome === nome);
@@ -179,11 +216,11 @@ function renderFavoritosAsteroides() {
   });
 }
 
-// ================================
 // ASTEROIDES - BUSCA PRINCIPAL
-// ================================
 
 async function buscarAsteroides() {
+  if (!validarDataBusca()) return;
+
   const data = dataBusca.value;
   const url = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${data}&end_date=${data}&api_key=${API_KEY}`;
 
@@ -248,11 +285,8 @@ async function buscarAsteroides() {
 
 buscarAsteroides();
 
-// ================================
 // GALERIA DE IMAGENS NASA
-// ================================
 
-const searchInput = document.getElementById("searchInput");
 const galleryGrid = document.getElementById("galleryGrid");
 
 searchInput.addEventListener("keydown", (e) => {
@@ -260,8 +294,9 @@ searchInput.addEventListener("keydown", (e) => {
 });
 
 async function buscarImagensNASA() {
+  if (!validarTextoBusca(searchInput, searchError, "A busca de imagens")) return;
+
   const termo = searchInput.value.trim();
-  if (!termo) return;
 
   galleryGrid.innerHTML = "<p>Carregando imagens...</p>";
 
